@@ -5,13 +5,16 @@ import os
 
 from flask import Flask, render_template, request
 
-app = Flask('avi_app')  # create flask instance
+app = Flask('__name__')  # create flask instance
 
 foods = [{'id': 1, 'name': 'jahnoon', 'score': 6, 'calories': 400}
     , {'id': 2, 'name': 'shawarma', 'score': 9, 'calories': 2000}
     , {'id': 3, 'name': 'T-bone', 'score': 10, 'calories': 500}
     , {'id': 4, 'name': 'tofu salad', 'score': 1, 'calories': 19}]
 
+@app.route("/")
+def hello_world():
+    return "<p>Hello, World! \n app running</p>"
 
 @app.route('/foods',methods=['POST'])
 def add_new_food():
@@ -51,5 +54,5 @@ def welcome_page():
 def render_html():
     return render_template('index.html')
 
-
-app.run(os.environ.get('PORT'))#os.environ.get('PORT') --> PORT FROM ENV VAR IN DOCKER
+if __name__ =='__main__':
+    app.run(host="0.0.0.0", port=os.environ.get('PORT'))#os.environ.get('PORT') --> PORT FROM ENV VAR IN DOCKER

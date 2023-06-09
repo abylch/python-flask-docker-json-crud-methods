@@ -1,0 +1,14 @@
+version: '3'
+services:
+  flask-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: flaskimage:v1.0
+    ports:
+      - 8989:5010
+
+# Dockerfile itself cannot automatically map ports on the host machine to ports in the container
+# without explicitly specifying the port during the docker run command.
+# docker-compose.yml file to automatically map port 8989 on the host to port 5010 in the container
+# run the file type in terminal: 'docker-compose up'
